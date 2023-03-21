@@ -2,7 +2,8 @@ api:
   kakao:
     key:
   naver:
-    key:
+    clientId:
+    clientSecret:
 spring:
   datasource:
     url:
