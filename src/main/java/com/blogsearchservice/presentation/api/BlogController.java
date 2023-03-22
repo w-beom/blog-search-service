@@ -1,7 +1,7 @@
 package com.blogsearchservice.presentation.api;
 
 import com.blogsearchservice.application.QueryHistoryService;
-import com.blogsearchservice.client.ApiClient;
+import com.blogsearchservice.application.ApiClientService;
 import com.blogsearchservice.presentation.dto.PopularQueryResponse;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -18,11 +18,11 @@ import java.util.List;
 @RestController
 @Validated
 public class BlogController {
-    private final ApiClient apiClient;
+    private final ApiClientService apiClientService;
     private final QueryHistoryService queryHistoryService;
 
-    public BlogController(ApiClient apiClient, QueryHistoryService queryHistoryService) {
-        this.apiClient = apiClient;
+    public BlogController(ApiClientService apiClientService, QueryHistoryService queryHistoryService) {
+        this.apiClientService = apiClientService;
         this.queryHistoryService = queryHistoryService;
     }
 
@@ -33,7 +33,7 @@ public class BlogController {
                                          @RequestParam(required = false, defaultValue = "1") @Min(1) @Max(value = 50, message = "page는 50을 넘길 수 없습니다.") final int page,
                                          @RequestParam(required = false, defaultValue = "10") @Min(1) @Max(value = 50, message = "size는 50을 넘길 수 없습니다.") final int size) {
 
-        return ResponseEntity.ok(apiClient.searchBlogs(query, sort, page, size));
+        return ResponseEntity.ok(apiClientService.searchBlogs(query, sort, page, size));
     }
 
     @GetMapping(value = "/popular", produces = MediaType.APPLICATION_JSON_VALUE)

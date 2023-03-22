@@ -1,32 +1,30 @@
-package com.blogsearchservice.client;
+package com.blogsearchservice.application;
 
-import com.blogsearchservice.application.QueryHistoryService;
+import com.blogsearchservice.client.Client;
 import com.blogsearchservice.presentation.exception.ApiRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
-public class ApiClient {
+public class ApiClientService {
     private final Logger log = LoggerFactory.getLogger(this.getClass().getSimpleName());
     private final RestTemplate restTemplate;
     private final QueryHistoryService searchService;
     private final List<Client> clients;
 
 
-    public ApiClient(RestTemplate restTemplate, QueryHistoryService searchService, List<Client> clients) {
+    public ApiClientService(RestTemplate restTemplate, QueryHistoryService searchService, List<Client> clients) {
         this.restTemplate = restTemplate;
         this.searchService = searchService;
         this.clients = clients;
     }
 
-    @Transactional
     public String searchBlogs(String query, String sort, int page, int size) {
         for (Client client : clients) {
             try {
