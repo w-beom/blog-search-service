@@ -1,6 +1,6 @@
 package com.blogsearchservice.presentation.exception;
 
-public class ApiRequestException extends RuntimeException{
+public class ApiRequestException extends RuntimeException {
     public ApiRequestException() {
         super();
     }
