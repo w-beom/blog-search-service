@@ -1,6 +1,7 @@
 package com.blogsearchservice.client;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -10,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Component
+@Order(1)
 public class KakaoClient implements Client{
     private static final String BLOG_SEARCH_API_URL = "https://dapi.kakao.com/v2/search/blog";
 

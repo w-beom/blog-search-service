@@ -1,6 +1,7 @@
 package com.blogsearchservice.client;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -11,6 +12,7 @@ import java.net.URI;
 import java.util.stream.Stream;
 
 @Component
+@Order(2)
 public class NaverClient implements Client {
     private static final String BLOG_SEARCH_API_URL = "https://openapi.naver.com/v1/search/blog";
 
