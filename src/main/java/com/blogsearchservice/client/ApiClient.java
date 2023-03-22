@@ -14,22 +14,25 @@ public class ApiClient {
     private final RestTemplate restTemplate;
     private final QueryHistoryService searchService;
     private final List<Client> clients;
-    private final NaverClient naverClient;
 
 
-    public ApiClient(RestTemplate restTemplate, QueryHistoryService searchService, List<Client> clients, NaverClient naverClient) {
+    public ApiClient(RestTemplate restTemplate, QueryHistoryService searchService, List<Client> clients) {
         this.restTemplate = restTemplate;
         this.searchService = searchService;
         this.clients = clients;
-        this.naverClient = naverClient;
     }
 
     @Transactional
     public String searchBlogs(String query, String sort, int page, int size) {
-        ResponseEntity<String> exchange = restTemplate.exchange(naverClient.createUri(query, sort, page, size), HttpMethod.GET, naverClient.createHttpEntity(), String.class);
-
-        searchService.updateQueryHistory(query);
-
-        return exchange.getBody();
+        for (Client client : clients) {
+            try {
+                ResponseEntity<String> exchange = restTemplate.exchange(client.createUri(query, sort, page, size), HttpMethod.GET, client.createHttpEntity(), String.class);
+                searchService.updateQueryHistory(query);
+                return exchange.getBody();
+            } catch (Exception e) {
+                continue;
+            }
+        }
+        throw new RuntimeException();
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Component
-public class KakaoClient extends Client{
+public class KakaoClient implements Client{
     private static final String BLOG_SEARCH_API_URL = "https://dapi.kakao.com/v2/search/blog";
 
     @Value("${api.kakao.key}")

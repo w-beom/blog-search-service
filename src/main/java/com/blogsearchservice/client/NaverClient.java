@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.stream.Stream;
 
 @Component
-public class NaverClient extends Client {
+public class NaverClient implements Client {
     private static final String BLOG_SEARCH_API_URL = "https://openapi.naver.com/v1/search/blog";
 
     @Value("${api.naver.clientId}")
