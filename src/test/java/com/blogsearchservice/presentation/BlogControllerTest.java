@@ -62,7 +62,7 @@ class BlogControllerTest {
     }
 
     @Test
-    @DisplayName("인기검색어를 최대 10개까지 조회한다.")
+    @DisplayName("/popular 정상호출")
     void popularTest() throws Exception {
         mockMvc.perform(get("/popular"))
                 .andExpect(status().isOk())
